@@ -9,6 +9,7 @@
     <title>Momentum</title>
 </head>
 <body>
+    <!-- 로그인한 사용자가 없을 시(입력만 하는 로그인) 이름을 입력 받을 input form -->
     <form id="login-form" class="hidden">
         <input
             required
@@ -17,14 +18,33 @@
             placeholder="What is your name?" />
         <input type="submit" value="Log In" />
     </form>
+
+    <!-- 사용자에게 보여줄 인사 -->
     <h1 id="greeting" class="hidden"></h1>
+
+    <!-- 투두를 입력할 input form -->
+    <form id="todo-form">
+        <input type="text" placeholder="Write a To Do and Press Enter" required/>
+    </form>
+
+    <!-- 투두리스트를 보여줄 ul -->
+    <uㅣ id="todo-list">
+
+    </uㅣ>
+
+    <!-- 현재 시간을 보여주는 clock -->
     <h2 id="clock"></h2>
+
+    <!-- 명언 -->
     <div id="quote">
         <span ></span>
         <span ></span>
     </div>
+
     <script src="js/greetings.js"></script>
     <script src="js/clock.js"></script>
     <script src="js/quotes.js"></script>
+    <script src="js/background.js"></script>
+    <script src="js/todo.js"></script>
 </body>
 </html>
