@@ -6,24 +6,32 @@ const toDoList = document.getElementById("todo-list");
 const TODOS_KEY = "todos";
 
 const savedToDos = localStorage.getItem(TODOS_KEY);
-const toDos = JSON.parse(savedToDos);
+let toDos = savedToDos ? JSON.parse(savedToDos) : [];
 
 // 투두리스트를 저장할 함수
 function saveToDos(){
     localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
 }
+
+
+
 function deleteToDo(){
     const li = event.target.parentElement;
     li.remove();
+
+    toDos = toDos.filter((todo) => todo.today !== parseInt(li.id));
+    saveToDos();
 }
+
 
 function paintToDo(newTodo){
     const li = document.createElement("li");
     const span = document.createElement("span");
     const button = document.createElement("button");
-    span.innerText = newTodo;
+    span.innerText = newTodo.text;
     button.innerText = '❎';
     button.addEventListener("click", deleteToDo);
+    li.id = newTodo.today;
     li.appendChild(span);
     li.appendChild(button);
     toDoList.appendChild(li);
@@ -33,9 +41,13 @@ function handleToDoSubmit(event){
     event.preventDefault();
     const newToDo = toDoInput.value;
     toDoInput.value = "";
+    const newToDoObject = {
+        today: Date.now(),
+        text: newToDo
+    };
 
-    paintToDo(newToDo);
-    toDos.push(newToDo);
+    paintToDo(newToDoObject);
+    toDos.push(newToDoObject);
     saveToDos();
 }
 
